@@ -1,5 +1,5 @@
 const Engineer = require("../lib/Engineer.js");
-const newEngineer = new Engineer("Byrtie", "2688", "byrtie@email.com", "github.com/byrtie");
+const testEngineer = new Engineer("Byrtie", "2688", "byrtie@email.com", "github.com/byrtie");
 
 test("Engineer", () => {
     const testEngineerOb = new Engineer();

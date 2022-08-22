@@ -18,7 +18,7 @@ test("if the getName method will return the name", () => {
 });
 
 test("if the getId method will return the id", () => {
-    expect(testIntern.getId).toBe("2688");
+    expect(testIntern.getId()).toBe("2688");
 });
 
 test("if the getEmail method will return the method", () => {
