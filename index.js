@@ -4,150 +4,99 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Employee = require("./lib/Employee");
-let path = require("path");
-// let fileName = "index.html";
+// let path = require("path");
 // let generateHtml = require("./utils/generateHtml.js");
 
-let managerQuestions = [
-  {
-    type: "input",
-    name: "managerName",
-    message: "Please enter your name",
-  },
-  {
-    type: "input",
-    name: "managerId",
-    message: "Please enter manager ID",
-  },
-  {
-    type: "input",
-    name: "emailAddress",
-    message: "Please enter your email address",
-  },
-  {
-    type: "input",
-    name: "officeNumber",
-    message: "Please enter your office number",
-  },
-];
+//create an empty array for employee data
+const employeeData = [];
 
-let engineerQuestions = [
-  {
-    type: "input",
-    name: "engineerName",
-    message: "Please enter your name",
-  },
-  {
-    type: "input",
-    name: "engineerId",
-    message: "Please enter your office ID",
-  },
-  {
-    type: "input",
-    name: "engineerEmail",
-    message: "Please enter your email address",
-  },
-  {
-    type: "input",
-    name: "github",
-    message: "Please enter your Github URL",
-  },
-];
-
-let internQuestions = [
-  {
-    type: "input",
-    name: "internName",
-    message: "Please enter your name",
-  },
-  {
-    type: "input",
-    name: "internId",
-    message: "Please enter your office ID",
-  },
-  {
-    type: "input",
-    name: "internEmail",
-    message: "Please enter your email address",
-  },
-  {
-    type: "input",
-    name: "school",
-    message: "Please enter the name of your school",
-  },
-];
-
-async function managerQuestionPrompt(managerQuestions) {
-  let managerAnswers = await inquirer.prompt(managerQuestions);
-  return managerAnswers;
+//create an array of initial questions
+const questionData = async () => {
+    const data = await inquirer
+    .prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "Please enter your name",
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "Please enter your employee ID",
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "Please enter your employee email address",
+        },
+        {
+            type: "list",
+            name: "role",
+            message: "What do you want to do next",
+            choices: ["Add Engineer", "Add Intern", "Build Team"]
+        }
+    ]);
 }
 
-let employeeOptions = [
-  {
-    type: "list",
-    name: "employeeOption",
-    message: "Do you want to add an intern, engineer, or finish?",
-    choices: ["Intern", "Engineer", "Build Team"],
-  },
-];
+if (data.role === "Manager") {
+    const managerData = await inquirer
+    .prompt([
+        {
+            type: "input",
+            name: "officeNumber",
+            message: "Please enter your office number"
+        }
+    ]);
 
-async function addEngineerOrIntern(employeeOptions) {
-  let employeeChoice = await inquirer.prompt(employeeOptions);
-  return employeeChoice;
-}
-
-function engineerOrIntern(data) {
-  console.log(data);
-  if (data.employeeOption === "Engineer") {
-    inquirer.prompt(engineerQuestions).then((engineerData) => {
-      let engineerObj = new Engineer(
-        engineerData.engineerName,
-        engineerData.engineerId,
-        engineerData.engineerEmail,
-        engineerData.github
-      );
-      console.log(engineerObj);
-    //   createOrAppendFile(fileName, generateHtml(engineerObj))
-      engineerOrIntern(addEngineerOrIntern(employeeOptions));
-    });
-  } else if (data.employeeOption === "Intern") {
-    inquirer.prompt(internQuestions).then((internData) => {
-      let internObj = new Intern(
-        internData.internName,
-        internData.internId,
-        internData.internEmail,
-        internData.school
-      );
-    //   createOrAppendFile(fileName, generateHtml(internObj))
-      engineerOrIntern(addEngineerOrIntern(employeeOptions));
-    });
-  } else if (data.employeeOption === "Build Team") {
-    // createOrAppendFile(fileName, createFooter())
-    exit();
-  }
-}
-
-function startQuestions() {
-  managerQuestionPrompt(managerQuestions).then((data) => {
-    console.log(data);
-    const newManager = new Manager(
-      data.managerName,
-      data.managerId,
-      data.emailAddress,
-      data.officeNumber
+    const newManager = new Manager (
+        data.name,
+        data.id,
+        data.email,
+        data.officeNumber
     );
-    // createOrAppendFile(fileName, generateHtml(newManagerObj));
-  });
-  addEngineerOrIntern(employeeOptions).then((options) => {
-    engineerOrIntern(options);
-  });
-}
 
-function createOrAppendFile(fileName, data) {
-  fs.appendFileSync(path.join(process.cwd(), fileName), data, (err) => {
-    if (err) throw err;
-    // console.log("dataSavedSuccessfully")
-  });
-}
+    employeeData.push(newManager);
 
-startQuestions();
+}else if (data.role === "Engineer") {
+    const engineerData = await inquirer
+    .prompt([
+        {
+            type: "input",
+            name: "github",
+            message: "Please enter your github URL"
+        }
+    ]);
+
+    const newEngineer = new Engineer (
+        data.name,
+        data.id,
+        data.email,
+        data.github
+    );
+
+    employeeData.push(newEngineer);
+
+}else if (data.role === "Intern") {
+    const internData = await inquirer
+    .prompt([
+        {
+            type: "input",
+            name: "school",
+            message: "Please enter the name of your school"
+        }
+    ]);
+
+    const newIntern = new Intern (
+        data.name,
+        data.id,
+        data.email,
+        data.school
+    );
+
+    employeeData.push(newIntern);
+
+}else 
+
+
+      
+

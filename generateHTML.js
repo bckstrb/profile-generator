@@ -7,7 +7,7 @@ function generateHtml (data) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
         <script src="https://kit.fontawesome.com/18df1bb9a5.js" crossorigin="anonymous"></script>
-        <title>Document</title>
+        <title>My Team</title>
     </head>
     <body>
     
@@ -19,13 +19,12 @@ function generateHtml (data) {
       <div class="col-lg-4">
         <div class="card">
           <div class="card-body bg-dark">
-            
-            <h3 class="card-title text-center text-white"></i>Manager</h3>
+            <h3 class="card-title text-center text-white">Manager <i class="fa-solid fa-address-book"></i></h3>
             <p class="card-text text-center text-white">Name</p>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID</li>
-                <li class="list-group-item">Email Address</li>
-                <li class="list-group-item">Office Number</li>
+                <li class="list-group-item">ID: ${}</li>
+                <li class="list-group-item">Email Address: ${}</li>
+                <li class="list-group-item">Office Number: ${}</li>
               </ul>
           </div>
         </div>
@@ -33,12 +32,12 @@ function generateHtml (data) {
       <div class="col-lg-4">
         <div class="card">
           <div class="card-body bg-dark">
-            <h3 class="card-title text-center text-white">Engineer</h3>
+            <h3 class="card-title text-center text-white">Engineer <i class="fa-solid fa-robot"></i></h3>
             <p class="card-text text-center text-white">Name</p>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID</li>
-                <li class="list-group-item">Email Address</li>
-                <li class="list-group-item">Github URL</li>
+                <li class="list-group-item">ID: ${}</li>
+                <li class="list-group-item">Email Address: ${}</li>
+                <li class="list-group-item">Github URL: ${}</li>
               </ul>
           </div>
         </div>
@@ -46,19 +45,19 @@ function generateHtml (data) {
       <div class="col-lg-4">
         <div class="card">
           <div class="card-body bg-dark">
-            <h3 class="card-title text-center text-white">Intern</h3>
+            <h3 class="card-title text-center text-white">Intern <i class="fa-solid fa-computer"></i></h3>
             <p class="card-text text-center text-white">Name</p>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID</li>
-                <li class="list-group-item">Email Address</li>
-                <li class="list-group-item">School</li>
+                <li class="list-group-item">ID: ${}</li>
+                <li class="list-group-item">Email Address: ${}</li>
+                <li class="list-group-item">School: ${}</li>
               </ul>
           </div>
         </div>
       </div>
     </div>
     
-        
+    <script src="index.js"></script>
     </body>
     </html>
     `
