@@ -1,4 +1,63 @@
-function generateHtml (data) {
+const fs = require("fs");
+
+//empty array that the cards will be pushed to 
+let htmlArray = []
+
+//create a function to create cards based on employee option 
+function sort (employeeData) {
+  for(let i = 0; i < employeeData.length; i++) {
+    if (employeeData[i].getRole() === "Manager") {
+      htmlArray.push(`
+      <div class="col-lg-3">
+        <div class="card">
+          <div class="card-body bg-dark">
+            <h3 class="card-title text-center text-white">Manager <i class="fa-solid fa-address-book"></i></h3>
+            <p class="card-text text-center text-white">${employeeData[i].name}</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: ${employeeData[i].id}</li>
+                <li class="list-group-item">Email Address: ${employeeData[i].email}</li>
+                <li class="list-group-item">Office Number: ${employeeData[i].officeNumber}</li>
+              </ul>
+          </div>
+        </div>
+      </div>`)
+    }else if (employeeData[i].getRole() === "Engineer") {
+        htmlArray.push(`
+        <div class="col-lg-3">
+        <div class="card">
+          <div class="card-body bg-dark">
+            <h3 class="card-title text-center text-white">Engineer <i class="fa-solid fa-robot"></i></h3>
+            <p class="card-text text-center text-white">${employeeData[i].name}</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: ${employeeData[i].id}</li>
+                <li class="list-group-item">Email Address: ${employeeData[i].email}</li>
+                <li class="list-group-item">Github URL: ${employeeData[i].github}</li>
+              </ul>
+          </div>
+        </div>
+      </div>`)
+    }else {
+      htmlArray.push(`
+      <div class="col-lg-3">
+        <div class="card">
+          <div class="card-body bg-dark">
+            <h3 class="card-title text-center text-white">Intern <i class="fa-solid fa-computer"></i></h3>
+            <p class="card-text text-center text-white">${employeeData[i].name}</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: ${employeeData[i].id}</li>
+                <li class="list-group-item">Email Address: ${employeeData[i].email}</li>
+                <li class="list-group-item">School: ${employeeData[i].school}</li>
+              </ul>
+          </div>
+        </div>
+      </div>`)
+    }
+  }
+  fs.writeFileSync("./index.html", generateHtml())
+}
+
+//function to generate an HTML file 
+function generateHtml () {
     return `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -16,45 +75,9 @@ function generateHtml (data) {
     </div>
     
     <div class="row">
-      <div class="col-lg-4">
-        <div class="card">
-          <div class="card-body bg-dark">
-            <h3 class="card-title text-center text-white">Manager <i class="fa-solid fa-address-book"></i></h3>
-            <p class="card-text text-center text-white">Name</p>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: ${}</li>
-                <li class="list-group-item">Email Address: ${}</li>
-                <li class="list-group-item">Office Number: ${}</li>
-              </ul>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="card">
-          <div class="card-body bg-dark">
-            <h3 class="card-title text-center text-white">Engineer <i class="fa-solid fa-robot"></i></h3>
-            <p class="card-text text-center text-white">Name</p>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: ${}</li>
-                <li class="list-group-item">Email Address: ${}</li>
-                <li class="list-group-item">Github URL: ${}</li>
-              </ul>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="card">
-          <div class="card-body bg-dark">
-            <h3 class="card-title text-center text-white">Intern <i class="fa-solid fa-computer"></i></h3>
-            <p class="card-text text-center text-white">Name</p>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">ID: ${}</li>
-                <li class="list-group-item">Email Address: ${}</li>
-                <li class="list-group-item">School: ${}</li>
-              </ul>
-          </div>
-        </div>
-      </div>
+    ${htmlArray}
+      
+      
     </div>
     
     <script src="index.js"></script>
@@ -63,4 +86,4 @@ function generateHtml (data) {
     `
 }
 
-module.exports = generateHtml;
+module.exports = sort;
